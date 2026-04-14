@@ -8,11 +8,24 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "bootstrap:european": "npx cdk bootstrap --profile=european",
+    "bootstrap:standard": "npx cdk bootstrap --profile=standard",
+    "synth:all": "npx cdk synth --all --validation --quiet --output cdk.out",
+    "deploy:european": "npx cdk deploy 'European/**' --outputs-file cdk.out/european.json --profile=european",
+    "deploy:standard": "npx cdk deploy 'Standard/**' --outputs-file cdk.out/standard.json --profile=standard",
+    "certs:generate": "npx ts-node src/scripts/generate-certs.ts",
+    "certs:upload": "AWS_PROFILE=standard npx ts-node src/scripts/upload-certs.ts",
+    "seed:invoices": "AWS_PROFILE=global npx ts-node src/scripts/seed-invoices.ts",
+    "seed:customers": "AWS_PROFILE=global npx ts-node src/scripts/seed-customers.ts",
+    "destroy:european": "npx cdk destroy 'European/**' --profile=standard",
+    "destroy:standard": "npx cdk destroy 'Standard/**' --profile=standard",
+    "cache:clear": "rm -rf cdk.out/cache"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/node": "^24.12.2",
+    "@types/node-forge": "^1.3.14",
     "aws-cdk": "2.1118.0",
     "jest": "^30",
     "ts-jest": "^29",
@@ -20,7 +33,9 @@
     "typescript": "~5.9.3"
   },
   "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.1030.0",
     "aws-cdk-lib": "^2.248.0",
-    "constructs": "^10.5.0"
+    "constructs": "^10.5.0",
+    "node-forge": "^1.4.0"
   }
 }
