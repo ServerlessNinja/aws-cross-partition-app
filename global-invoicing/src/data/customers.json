@@ -1,0 +1,65 @@
+[
+  {
+    "customerId": "CUST-0001",
+    "name": "Acme GmbH",
+    "country": "DE",
+    "email": "billing@acme.de",
+    "vatId": "DE123456789",
+    "city": "Berlin"
+  },
+  {
+    "customerId": "CUST-0002",
+    "name": "Acme Ltd",
+    "country": "GB",
+    "email": "billing@acme.co.uk",
+    "vatId": "GB987654321",
+    "city": "London"
+  },
+  {
+    "customerId": "CUST-0003",
+    "name": "Acme SAS",
+    "country": "FR",
+    "email": "facturation@acme.fr",
+    "vatId": "FR12345678901",
+    "city": "Paris"
+  },
+  {
+    "customerId": "CUST-0004",
+    "name": "Acme ApS",
+    "country": "DK",
+    "email": "faktura@acme.dk",
+    "vatId": "DK12345678",
+    "city": "Copenhagen"
+  },
+  {
+    "customerId": "CUST-0005",
+    "name": "Acme Corp",
+    "country": "US",
+    "email": "billing@acme.com",
+    "city": "New York"
+  },
+  {
+    "customerId": "CUST-0006",
+    "name": "Acme Sp. z o.o.",
+    "country": "PL",
+    "email": "faktura@acme.pl",
+    "vatId": "PL1234567890",
+    "city": "Warsaw"
+  },
+  {
+    "customerId": "CUST-0007",
+    "name": "Acme S.L.",
+    "country": "ES",
+    "email": "factura@acme.es",
+    "vatId": "ESA12345678",
+    "city": "Madrid"
+  },
+  {
+    "customerId": "CUST-0008",
+    "name": "Acme BV",
+    "country": "NL",
+    "email": "factuur@acme.nl",
+    "vatId": "NL123456789B01",
+    "city": "Amsterdam"
+  }
+]
