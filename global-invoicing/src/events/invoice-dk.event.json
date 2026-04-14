@@ -1,0 +1,22 @@
+{
+  "source": "ninja.serverless.invoicing",
+  "detailType": "InvoiceForwarder",
+  "detail": {
+    "invoice": {
+      "id": "INV-DK-10001",
+      "amount": 3000,
+      "currency": "DKK",
+      "date": "2025-03-01"
+    },
+    "customer": {
+      "name": "Acme ApS",
+      "country": "DK",
+      "vatId": "DK123456789"
+    },
+    "lineItems": [
+      { "description": "Digital product A", "quantity": 1, "price": 1000 },
+      { "description": "Digital product B", "quantity": 1, "price": 1000 },
+      { "description": "Digital product C", "quantity": 1, "price": 1000 }
+    ]
+  }
+}

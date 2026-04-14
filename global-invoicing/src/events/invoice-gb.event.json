@@ -1,0 +1,22 @@
+{
+  "source": "ninja.serverless.invoicing",
+  "detailType": "InvoiceForwarder",
+  "detail": {
+    "invoice": {
+      "id": "INV-GB-10001",
+      "amount": 300,
+      "currency": "GBP",
+      "date": "2025-03-01"
+    },
+    "customer": {
+      "name": "Acme Ltd",
+      "country": "GB",
+      "vatId": "GB123456789"
+    },
+    "lineItems": [
+      { "description": "Digital product A", "quantity": 1, "price": 100 },
+      { "description": "Digital product B", "quantity": 1, "price": 100 },
+      { "description": "Digital product C", "quantity": 1, "price": 100 }
+    ]
+  }
+}
