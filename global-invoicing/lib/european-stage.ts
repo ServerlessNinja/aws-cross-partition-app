@@ -6,7 +6,7 @@ export class EuropeanStage extends cdk.Stage {
   constructor(scope: Construct, id: string, props?: cdk.StageProps) {
     super(scope, id, props);
 
-    new BerlinStack(this, 'LondonStack');
+    new BerlinStack(this, 'BerlinStack');
 
   }
 }
