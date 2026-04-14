@@ -1,0 +1,64 @@
+import { ConfigProps } from "./types";
+
+export const configProps: ConfigProps = {
+  cache: "cdk.out/cache",
+  global: {
+    partition: "aws",
+    region: "eu-west-2",
+    profile: "standard",
+    location: "uk-london",
+    prefix: "invoicing",
+  },
+  europe: {
+    partition: "aws-eusc",
+    region: "eusc-de-east-1",
+    profile: "european",
+    location: "de-berlin",
+    prefix: "invoicing-eu",
+  },
+  certs: {
+    organization: "Surf Avenue",
+    organizationalUnit: "Invoicing",
+    country: "PL",
+    commonName: "Invoicing Bridge",
+  },
+  events: {
+    invoices: {
+      source: "org.surfave.invoicing",
+      detailType: "InvoiceForwarder",
+    },
+    customers: {
+      source: "org.surfave.invoicing",
+      detailType: "CustomerForwarder",
+    }
+  },
+  countries: [
+      "AT",
+      "BE",
+      "BG",
+      "CY",
+      "CZ",
+      "DE",
+      "DK",
+      "EE",
+      "ES",
+      "FI",
+      "FR",
+      "GR",
+      "HR",
+      "HU",
+      "IE",
+      "IT",
+      "LT",
+      "LU",
+      "LV",
+      "MT",
+      "NL",
+      "PL",
+      "PT",
+      "RO",
+      "SE",
+      "SI",
+      "SK",
+    ],
+};

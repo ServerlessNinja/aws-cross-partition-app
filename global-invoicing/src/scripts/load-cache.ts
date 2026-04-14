@@ -1,0 +1,44 @@
+import { Certificates, Parameters } from '../config/types';
+import { readFileSync } from 'fs';
+
+export function loadCachedCertificates(path: string): Certificates {
+
+  let certCache: Certificates;
+
+  try {
+    const certsFile = readFileSync(path, 'utf-8');
+    certCache = JSON.parse(certsFile);
+
+    const certs: Certificates = {
+      caCertPem: certCache.caCertPem,
+      bridgeCertPem: certCache.bridgeCertPem,
+      bridgeKeyPem: certCache.bridgeKeyPem,
+    }
+    return certs;
+
+  } catch (error) {
+    console.error('Unable to load certificates cache file:', path);
+    console.error('To generate certificates run: `npm run certs:generate`');
+    process.exit(1);
+  }
+}
+
+export function loadCachedParameters(path: string): Parameters {
+
+  let paramCache: Parameters;
+
+  try {
+    const paramsFile = readFileSync(path, 'utf-8');
+    paramCache = JSON.parse(paramsFile);
+
+    const params: Parameters = {
+      rolesAnywhere: paramCache.rolesAnywhere
+    }
+    return params;
+
+  } catch (error) {
+    console.error('Unable to load parameters cache file:', path);
+    console.error('To generate parameters run: `npm run params:get`');
+    process.exit(1);
+  }
+}
