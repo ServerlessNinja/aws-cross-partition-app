@@ -6,14 +6,14 @@ export const configProps: ConfigProps = {
     partition: "aws",
     region: "eu-west-2",
     profile: "standard",
-    location: "uk-london",
-    prefix: "invoicing",
+    location: "london",
+    prefix: "invoicing-uk",
   },
   europe: {
     partition: "aws-eusc",
     region: "eusc-de-east-1",
     profile: "european",
-    location: "de-berlin",
+    location: "berlin",
     prefix: "invoicing-eu",
   },
   certs: {

@@ -1,0 +1,70 @@
+Comment: Replicate customer data from standard partition to EUSC
+QueryLanguage: JSONata
+StartAt: Validate Event
+States:
+  Validate Event:
+    Type: Choice
+    Choices:
+      - Condition: "{% $exists($states.input.eventName) and
+          $exists($states.input.keys) and $states.input.eventName
+          in ['INSERT', 'MODIFY', 'REMOVE'] %}"
+        Next: Route By Event Type
+    Default: Fail
+  Route By Event Type:
+    Type: Choice
+    Choices:
+      - Condition: "{% $states.input.eventName = 'INSERT' or
+          $states.input.eventName = 'MODIFY' %}"
+        Next: Validate New Image
+      - Condition: "{% $states.input.eventName = 'REMOVE' %}"
+        Next: Delete Item
+    Default: Fail
+  Validate New Image:
+    Type: Choice
+    Choices:
+      - Condition: "{% $exists($states.input.newImage) and
+          $exists($states.input.newImage.customerId) %}"
+        Next: Put Item
+    Default: Fail
+  Put Item:
+    Type: Task
+    Resource: arn:${AwsPartition}:states:::dynamodb:putItem
+    Arguments:
+      TableName: ${CustomersTableName}
+      Item: "{% $merge([$states.input.newImage, {'updatedAt': {'S': $now()} }]) %}"
+    Retry:
+      - ErrorEquals:
+          - States.ALL
+        IntervalSeconds: 2
+        MaxAttempts: 3
+        BackoffRate: 2
+    Next: Success
+    Catch:
+      - ErrorEquals:
+          - States.ALL
+        Next: Fail
+  Delete Item:
+    Type: Task
+    Resource: arn:${AwsPartition}:states:::dynamodb:deleteItem
+    Arguments:
+      TableName: ${CustomersTableName}
+      Key: "{% $states.input.keys %}"
+    Retry:
+      - ErrorEquals:
+          - States.ALL
+        IntervalSeconds: 2
+        MaxAttempts: 3
+        BackoffRate: 2
+    Next: Success
+    Catch:
+      - ErrorEquals:
+          - States.ALL
+        Next: Fail
+  Fail:
+    Type: Fail
+    Error: SavingError
+    Comment: Saving failed
+    Cause: "{% $states.context.State.Name %}"
+  Success:
+    Type: Succeed
+    Comment: Customer saved successfully

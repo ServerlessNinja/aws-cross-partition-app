@@ -1,0 +1,69 @@
+Comment: Process incoming invoices on EUSC partition
+QueryLanguage: JSONata
+StartAt: Validate Invoice
+States:
+  Validate Invoice:
+    Type: Pass
+    Comment: Validate incoming invoice data
+    Next: Save Invoice
+    Assign:
+      invoiceId: "{% $states.input.invoice.id %}"
+      customerName: "{% $states.input.customer.name %}"
+      country: "{% $states.input.customer.country %}"
+      vatId: "{% $states.input.customer.vatId %}"
+      currency: "{% $states.input.invoice.currency %}"
+      amount: "{% $states.input.invoice.amount %}"
+      date: "{% $states.input.invoice.date %}"
+      status: "NEW_FORWARDED"
+      sovereignty: "EU"
+  Save Invoice:
+    Type: Task
+    Resource: arn:${AwsPartition}:states:::dynamodb:putItem
+    Comment: Save invoice to DynamoDB table
+    Arguments:
+      TableName: ${InvoicesTableName}
+      Item:
+        invoiceId:
+          S: "{% $invoiceId %}"
+        customerName:
+          S: "{% $customerName %}"
+        country:
+          S: "{% $country %}"
+        vatId:
+          S: "{% $vatId %}"
+        currency:
+          S: "{% $currency %}"
+        amount:
+          'N': "{% $string($amount) %}"
+        date:
+          S: "{% $date %}"
+        status:
+          S: "{% $status %}"
+        sovereignty:
+          S: "{% $sovereignty %}"
+        receivedAt:
+          S: "{% $now() %}"
+    Retry:
+      - ErrorEquals:
+          - States.ALL
+        BackoffRate: 2
+        IntervalSeconds: 1
+        MaxAttempts: 2
+    Catch:
+      - ErrorEquals:
+          - States.ALL
+        Next: Fail
+    TimeoutSeconds: 10
+    HeartbeatSeconds: 3
+    Next: Success
+  Fail:
+    Type: Fail
+    Error: SavingError
+    Comment: Saving failed
+    Cause: "{% $states.context.State.Name %}"
+  Success:
+    Type: Succeed
+    Output:
+      invoiceId: "{% $invoiceId %}"
+      status: "{% $status %}"
+    Comment: Invoice saved successfully
