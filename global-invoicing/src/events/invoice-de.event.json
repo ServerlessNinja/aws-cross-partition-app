@@ -1,5 +1,5 @@
 {
-  "source": "ninja.serverless.invoicing",
+  "source": "org.surfave.invoicing",
   "detailType": "InvoiceForwarder",
   "detail": {
     "invoice": {
