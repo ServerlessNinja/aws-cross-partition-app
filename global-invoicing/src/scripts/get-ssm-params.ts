@@ -1,7 +1,7 @@
 import { SSMClient, GetParameterCommand } from "@aws-sdk/client-ssm";
-import { configProps } from "../lib/config";
-import { Parameters } from "../lib/types";
-import { mkdirSync, writeFileSync } from "fs";
+import { configProps } from "../config/config";
+import { Parameters } from "../config/types";
+import { writeFileSync } from "fs";
 
 const prefix: string = configProps.europe.prefix;
 const region: string = configProps.europe.region;

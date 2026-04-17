@@ -1,15 +1,15 @@
 import { SecretsManagerClient, PutSecretValueCommand, CreateSecretCommand } from "@aws-sdk/client-secrets-manager";
 import { configProps } from "../config/config";
 import { Certificates } from "../config/types";
-import { loadCachedCertificates } from "./load-cache";
+import { loadCertificates } from "./load-cache";
 
 const prefix: string = configProps.global.prefix;
 const region: string = configProps.global.region;
-const cacheFile = "cdk.out/cache/certs.json";
+const cacheFile = `${configProps.cache}/certs.json`;
 const secretName = `${prefix}/bridge-certificate`;
 
 async function uploadCerts() {
-  const certs: Certificates = loadCachedCertificates(cacheFile);
+  const certs: Certificates = loadCertificates(cacheFile);
 
   const secretValue = JSON.stringify({
     certificate: certs.bridgeCertPem,

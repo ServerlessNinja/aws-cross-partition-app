@@ -1,5 +1,5 @@
 import * as forge from "node-forge";
-import { existsSync, readFileSync, writeFileSync, mkdirSync } from "fs";
+import { existsSync, writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
 import { CertConfig, Certificates } from "../config/types";
 import { configProps } from "../config/config";
@@ -108,8 +108,8 @@ function generateCertificates(props: CertConfig): Certificates {
   }
 
   return {
-    caCertPem: forge.pki.certificateToPem(caCert),
     // caKeyPem: forge.pki.privateKeyToPem(caKeys.privateKey),
+    caCertPem: forge.pki.certificateToPem(caCert),
     bridgeCertPem: forge.pki.certificateToPem(bridgeCert),
     bridgeKeyPem: forge.pki.privateKeyToPem(bridgeKeys.privateKey),
   };
