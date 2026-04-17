@@ -16,6 +16,7 @@
     "deploy:standard": "npx cdk deploy 'Standard/**' --outputs-file cdk.out/standard.json --profile=standard",
     "certs:generate": "npx ts-node src/scripts/generate-certs.ts",
     "certs:upload": "AWS_PROFILE=standard npx ts-node src/scripts/upload-certs.ts",
+    "params:get": "AWS_PROFILE=eusc npx ts-node src/scripts/get-ssm-params.ts",
     "seed:invoices": "AWS_PROFILE=global npx ts-node src/scripts/seed-invoices.ts",
     "seed:customers": "AWS_PROFILE=global npx ts-node src/scripts/seed-customers.ts",
     "destroy:european": "npx cdk destroy 'European/**' --profile=standard",

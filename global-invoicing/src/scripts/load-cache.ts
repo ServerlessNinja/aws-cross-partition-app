@@ -1,5 +1,5 @@
 import { Certificates, Parameters } from '../config/types';
-import { readFileSync } from 'fs';
+import { readFileSync, existsSync, writeFileSync } from 'fs';
 
 export function loadCertificates(path: string): Certificates {
 
@@ -28,8 +28,18 @@ export function loadParameters(path: string): Parameters {
   let paramCache: Parameters;
 
   try {
-    const paramsFile = readFileSync(path, 'utf-8');
-    paramCache = JSON.parse(paramsFile);
+    if (existsSync(path)) {
+      const paramsFile = readFileSync(path, 'utf-8');
+      paramCache = JSON.parse(paramsFile);
+    } else {
+      paramCache = { 
+        rolesAnywhere: { 
+          trustAnchorArn: 'value-not-set', 
+          profileArn: 'value-not-set', 
+          roleArn: 'value-not-set'
+        }
+      };
+    }
 
     const params: Parameters = {
       rolesAnywhere: paramCache.rolesAnywhere
@@ -37,8 +47,7 @@ export function loadParameters(path: string): Parameters {
     return params;
 
   } catch (error) {
-    console.error('Unable to load parameters cache file:', path);
-    console.error('To generate parameters run: `npm run params:get`');
+    console.error('To regenerate parameters run: `npm run params:get`');
     process.exit(1);
   }
 }

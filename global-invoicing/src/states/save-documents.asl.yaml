@@ -1,0 +1,101 @@
+QueryLanguage: JSONata
+StartAt: Validate Invoice
+States:
+  Validate Invoice:
+    Type: Pass
+    Comment: Validate incoming invoice data
+    Next: Get EU Countries
+    Assign:
+      payload: "{% $states.input %}"
+      invoiceId: "{% $states.input.invoice.id %}"
+      customerName: "{% $states.input.customer.name %}"
+      country: "{% $states.input.customer.country %}"
+      vatId: "{% $states.input.customer.vatId %}"
+      currency: "{% $states.input.invoice.currency %}"
+      amount: "{% $states.input.invoice.amount %}"
+      date: "{% $states.input.invoice.date %}"
+      status: NEW_RECEIVED
+      sovereignty: Global
+  Get EU Countries:
+    Type: Task
+    Resource: arn:aws:states:::aws-sdk:ssm:getParameter
+    Arguments:
+      Name: ${CountriesParameterName}
+    Output:
+      euCountries: "{% $split($states.result.Parameter.Value, ',') %}"
+#      payload: "{% $states.input %}"
+    Next: Check Data Sovereignty
+    Retry:
+      - ErrorEquals:
+          - States.ALL
+        BackoffRate: 2
+        IntervalSeconds: 1
+        MaxAttempts: 3
+    Catch:
+      - ErrorEquals:
+          - States.ALL
+        Next: Fail
+  Fail:
+    Type: Fail
+  Check Data Sovereignty:
+    Type: Choice
+    Choices:
+      - Condition: "{% $country in $states.input.euCountries %}"
+        Next: Forward Invoice to EUSC
+    Default: Save Invoice
+  Forward Invoice to EUSC:
+    Type: Task
+    Resource: arn:aws:states:::lambda:invoke
+    Arguments:
+      FunctionName: ${BridgeFunctionName}
+      Payload: "{% $payload %}"
+    Next: Success
+    Retry:
+      - ErrorEquals:
+          - States.ALL
+        BackoffRate: 2
+        IntervalSeconds: 1
+        MaxAttempts: 3
+    Catch:
+      - ErrorEquals:
+          - States.ALL
+        Next: Fail
+  Save Invoice:
+    Type: Task
+    Resource: arn:aws:states:::dynamodb:putItem
+    Arguments:
+      TableName: ${InvoicesTableName}
+      Item:
+        invoiceId:
+          S: "{% $invoiceId %}"
+        customerName:
+          S: "{% $customerName %}"
+        country:
+          S: "{% $country %}"
+        vatId:
+          S: "{% $vatId %}"
+        currency:
+          S: "{% $currency %}"
+        amount:
+          N: "{% $string($amount) %}"
+        date:
+          S: "{% $date %}"
+        status:
+          S: "{% $status %}"
+        sovereignty:
+          S: "{% $sovereignty %}"
+        receivedAt:
+          S: "{% $now() %}"
+    Next: Success
+    Retry:
+      - ErrorEquals:
+          - States.ALL
+        BackoffRate: 2
+        IntervalSeconds: 1
+        MaxAttempts: 3
+    Catch:
+      - ErrorEquals:
+          - States.ALL
+        Next: Fail
+  Success:
+    Type: Succeed

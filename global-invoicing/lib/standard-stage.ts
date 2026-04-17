@@ -1,16 +1,31 @@
 import * as cdk from 'aws-cdk-lib/core';
 import { Construct } from 'constructs';
-import { LondonStack } from './london-stack';
 import { configProps } from '../src/config/config';
+import { Parameters } from '../src/config/types';
+import { loadParameters } from '../src/scripts/load-cache';
+import { LondonStack } from './london-stack';
 
 export class StandardStage extends cdk.Stage {
   constructor(scope: Construct, id: string, props?: cdk.StageProps) {
     super(scope, id, props);
 
     const cfg = configProps;
+    const params: Parameters = loadParameters(`${cfg.cache}/params.json`);
 
     // Stack(s) for aws partition
-    new LondonStack(this, 'LondonStack');
+    new LondonStack(this, 'LondonStack', {
+      stackName: `${cfg.global.prefix}-${cfg.global.location}`.toLowerCase(),
+      prefix: cfg.global.prefix,
+      events: cfg.events,
+      europeanProps: {
+        prefix: cfg.europe.prefix,
+        region: cfg.europe.region,
+        raTrustAnchorArn: params.rolesAnywhere.trustAnchorArn,
+        raProfileArn: params.rolesAnywhere.profileArn,
+        raRoleArn: params.rolesAnywhere.roleArn,
+      },
+      euCountries: cfg.countries
+    });
 
   }
 }

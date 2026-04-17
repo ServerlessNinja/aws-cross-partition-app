@@ -5,7 +5,7 @@ import { writeFileSync } from "fs";
 
 const prefix: string = configProps.europe.prefix;
 const region: string = configProps.europe.region;
-const cacheFile = "cdk.out/params.json"
+const cacheFile = `${configProps.cache}/params.json`;
 
 async function getSsmParameters() {
   const client = new SSMClient({ region: region });
