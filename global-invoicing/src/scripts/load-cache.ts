@@ -1,7 +1,7 @@
 import { Certificates, Parameters } from '../config/types';
 import { readFileSync } from 'fs';
 
-export function loadCachedCertificates(path: string): Certificates {
+export function loadCertificates(path: string): Certificates {
 
   let certCache: Certificates;
 
@@ -23,7 +23,7 @@ export function loadCachedCertificates(path: string): Certificates {
   }
 }
 
-export function loadCachedParameters(path: string): Parameters {
+export function loadParameters(path: string): Parameters {
 
   let paramCache: Parameters;
 
