@@ -14,7 +14,7 @@ export class EuropeanStage extends cdk.Stage {
 
     // Stack(s) for aws-eusc partition
     new BerlinStack(this, 'BerlinStack', {
-      prefix: cfg.europe.prefix,
+      prefix: cfg.european.prefix,
       caCertPem: certs.caCertPem,
       orgInfo: cfg.certs,
       events: cfg.events,

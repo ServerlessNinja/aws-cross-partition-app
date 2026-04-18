@@ -14,12 +14,12 @@ export class StandardStage extends cdk.Stage {
 
     // Stack(s) for aws partition
     new LondonStack(this, 'LondonStack', {
-      stackName: `${cfg.global.prefix}-${cfg.global.location}`.toLowerCase(),
-      prefix: cfg.global.prefix,
+      stackName: `${cfg.standard.prefix}-${cfg.standard.location}`.toLowerCase(),
+      prefix: cfg.standard.prefix,
       events: cfg.events,
       europeanProps: {
-        prefix: cfg.europe.prefix,
-        region: cfg.europe.region,
+        prefix: cfg.european.prefix,
+        region: cfg.european.region,
         raTrustAnchorArn: params.rolesAnywhere.trustAnchorArn,
         raProfileArn: params.rolesAnywhere.profileArn,
         raRoleArn: params.rolesAnywhere.roleArn,
