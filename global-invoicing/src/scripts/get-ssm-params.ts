@@ -3,12 +3,13 @@ import { configProps } from "../config/config";
 import { Parameters } from "../config/types";
 import { writeFileSync } from "fs";
 
-const prefix: string = configProps.europe.prefix;
-const region: string = configProps.europe.region;
+const prefix: string = configProps.european.prefix;
+const region: string = configProps.european.region;
+const profile: string = configProps.european.profile;
 const cacheFile = `${configProps.cache}/params.json`;
 
 async function getSsmParameters() {
-  const client = new SSMClient({ region: region });
+  const client = new SSMClient({ profile: profile, region: region });
 
   console.log("Fetching parameters from SSM Parameter Store...");
 

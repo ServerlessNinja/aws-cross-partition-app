@@ -2,14 +2,14 @@ import { ConfigProps } from "./types";
 
 export const configProps: ConfigProps = {
   cache: "cdk.out/cache",
-  global: {
+  standard: {
     partition: "aws",
     region: "eu-west-2",
     profile: "standard",
     location: "london",
     prefix: "invoicing-uk",
   },
-  europe: {
+  european: {
     partition: "aws-eusc",
     region: "eusc-de-east-1",
     profile: "european",
@@ -18,9 +18,9 @@ export const configProps: ConfigProps = {
   },
   certs: {
     organization: "Surf Avenue",
-    organizationalUnit: "Invoicing",
+    organizationalUnit: "Accounting",
     country: "PL",
-    commonName: "Invoicing Bridge",
+    commonName: "Global Invoicing",
   },
   events: {
     invoices: {

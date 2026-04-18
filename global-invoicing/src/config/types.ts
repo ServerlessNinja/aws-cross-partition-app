@@ -29,8 +29,8 @@ export interface EventBridgeConfig {
 }
 
 export interface ConfigProps {
-  global: StandardPartitionConfig;
-  europe: EuropeanPartitionConfig;
+  standard: StandardPartitionConfig;
+  european: EuropeanPartitionConfig;
   certs: OrganizationInfo;
   events: {
     invoices: EventBridgeConfig;
