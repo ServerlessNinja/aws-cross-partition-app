@@ -10,19 +10,15 @@ const app = new cdk.App();
 // Stage for aws-eusc partition
 new EuropeanStage(app, 'European', {
   env: {
-    // account: process.env.CDK_DEFAULT_ACCOUNT,
-    // region: cfg.european.region ?? 'eusc-de-east-1',
     account: process.env.CDK_DEFAULT_ACCOUNT,
-    region: process.env.CDK_REGION_EUSC ?? 'eusc-de-east-1',
+    region: cfg.european.region ?? 'eusc-de-east-1',
   },
 });
 
 // Stage for aws partition
 new StandardStage(app, 'Standard', {
   env: {
-    // account: process.env.CDK_DEFAULT_ACCOUNT,
-    // region: cfg.standard.region ?? 'eu-west-2',
     account: process.env.CDK_DEFAULT_ACCOUNT,
-    region: process.env.CDK_REGION_STANDARD ?? 'eu-west-2',
+    region: cfg.standard.region ?? 'eu-west-2',
   },
 });

@@ -7,10 +7,10 @@ const region: string = configProps.standard.region;
 const profile: string = configProps.standard.profile;
 
 const eventFiles = [
-  "shared-tools/events/invoice-de.event.json",
-  "shared-tools/events/invoice-dk.event.json",
-  "shared-tools/events/invoice-gb.event.json",
-  "shared-tools/events/invoice-pl.event.json",
+  "src/events/invoice-de.event.json",
+  "src/events/invoice-dk.event.json",
+  "src/events/invoice-gb.event.json",
+  "src/events/invoice-pl.event.json",
 ];
 
 async function seedInvoices() {

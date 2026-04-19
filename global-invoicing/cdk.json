@@ -1,6 +1,6 @@
 {
   "app": "npx ts-node --prefer-ts-exts bin/global-invoicing.ts",
-  "requireApproval": "broadening",
+  "requireApproval": "never",
   "quiet": true,
   "watch": {
     "include": [

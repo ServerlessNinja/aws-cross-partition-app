@@ -4,24 +4,27 @@
   "bin": {
     "global-invoicing": "bin/global-invoicing.js"
   },
+  "config": {
+    "profile": {
+      "aws": "standard",
+      "eusc": "european"
+    }
+  },
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "echo:test": "echo ${npm_package_config_profile_eusc}",
-    "bootstrap:european": "dotenv -e .env.cdk -- npx cdk bootstrap --profile $CDK_PROFILE_EUSC",
-    "bootstrap:standard": "dotenv -e .env.cdk -- npx cdk bootstrap --profile $CDK_PROFILE_STANDARD",
     "synth:all": "npx cdk synth --all --validation --quiet --output cdk.out",
-    "deploy:european": "dotenv -e .env.cdk -- npx cdk deploy 'European/**' --profile $CDK_PROFILE_EUSC",
-    "deploy:standard": "dotenv -e .env.cdk -- npx cdk deploy 'Standard/**' --profile $CDK_PROFILE_STANDARD",
+    "deploy:european": "npx cdk deploy 'European/**' --profile ${npm_package_config_profile_eusc}",
+    "deploy:standard": "npx cdk deploy 'Standard/**' --profile ${npm_package_config_profile_aws}",
     "certs:generate": "npx ts-node src/scripts/generate-certs.ts",
     "certs:upload": "npx ts-node src/scripts/upload-certs.ts",
     "params:get": "npx ts-node src/scripts/get-ssm-params.ts",
     "seed:invoices": "npx ts-node src/scripts/seed-invoices.ts",
     "seed:customers": "npx ts-node src/scripts/seed-customers.ts",
-    "destroy:european": "dotenv -e .env.cdk -- npx cdk destroy 'European/**' --profile $CDK_PROFILE_EUSC",
-    "destroy:standard": "dotenv -e .env.cdk -- npx cdk destroy 'Standard/**' --profile $CDK_PROFILE_STANDARD",
+    "destroy:european": "npx cdk destroy 'European/**' --profile ${npm_package_config_profile_eusc}",
+    "destroy:standard": "npx cdk destroy 'Standard/**' --profile ${npm_package_config_profile_aws}",
     "cache:clear": "rm -rf cdk.out/cache"
   },
   "devDependencies": {

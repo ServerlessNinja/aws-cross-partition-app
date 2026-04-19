@@ -6,7 +6,7 @@ import { readFileSync } from "fs";
 const prefix: string = configProps.standard.prefix;
 const region: string = configProps.standard.region;
 const profile: string = configProps.standard.profile;
-const dataFile = "../data/customers.json";
+const dataFile = "src/data/customers.json";
 const tableName = `${prefix}-customers`;
 
 async function seedCustomers() {
