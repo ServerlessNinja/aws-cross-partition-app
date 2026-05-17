@@ -14,7 +14,6 @@ export class StandardStage extends cdk.Stage {
 
     // Stack(s) for aws partition
     new LondonStack(this, 'LondonStack', {
-      stackName: `${cfg.standard.prefix}-${cfg.standard.location}`.toLowerCase(),
       prefix: cfg.standard.prefix,
       events: cfg.events,
       europeanProps: {
