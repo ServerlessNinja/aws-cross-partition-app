@@ -91,6 +91,7 @@ export class LondonStack extends cdk.Stack {
         EUSC_BUS_NAME: `${props.europeanProps.prefix}-bus`,
         EUSC_SOURCE: props.events.customers.source,
         EUSC_DETAIL_TYPE: props.events.customers.detailType,
+        EU_COUNTRIES: props.euCountries.join(','),
       },
     });
 
@@ -106,7 +107,11 @@ export class LondonStack extends cdk.Stack {
       tableName: `${props.prefix}-documents`,
       partitionKey: {
         name: "invoiceId",
-        type: dynamodb.AttributeType.STRING
+        type: dynamodb.AttributeType.STRING,
+      },
+      sortKey: {
+        name: "country",
+        type: dynamodb.AttributeType.STRING,
       },
       billing: dynamodb.Billing.onDemand(),
       encryption: dynamodb.TableEncryptionV2.awsManagedKey(),
@@ -122,7 +127,11 @@ export class LondonStack extends cdk.Stack {
       tableName: `${props.prefix}-customers`,
       partitionKey: {
         name: "customerId",
-        type: dynamodb.AttributeType.STRING
+        type: dynamodb.AttributeType.STRING,
+      },
+      sortKey: {
+        name: "country",
+        type: dynamodb.AttributeType.STRING,
       },
       billing: dynamodb.Billing.onDemand(),
       encryption: dynamodb.TableEncryptionV2.awsManagedKey(), 

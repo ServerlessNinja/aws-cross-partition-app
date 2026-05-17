@@ -1,8 +1,7 @@
 {
   "cli-telemetry": false,
   "@aws-cdk/core:target-partitions": [ 
-    "aws", 
-    "aws-cn", 
+    "aws",
     "aws-eusc"
   ]
 }

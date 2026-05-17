@@ -49,10 +49,9 @@ aws sts get-caller-identity --profile standard
 aws sts get-caller-identity --profile european
 ```
 
-This AWS CDK project relies on AWS CLI profiles named `standard` and `european`. If you decide to name your profiles differently, or use another regions for deployment, please update the [config.ts](global-invoicing/src/config/config.ts) and [package.json](global-invoicing/package.json) files accordingly:
+This AWS CDK project relies on AWS CLI profiles named `standard` and `european`. If you decide to name your profiles differently, or use another regions for deployment, please update the [config.ts](global-invoicing/src/config/config.ts) and [package.json](global-invoicing/package.json) files:
 
-```bash
-# global-invoicing/src/config/config.ts
+```typescript
   ...
   standard: {
     partition: "aws",
@@ -66,8 +65,9 @@ This AWS CDK project relies on AWS CLI profiles named `standard` and `european`.
     profile: "european",
     ...
   },
+```
 
-# global-invoicing/package.json
+```json
   ...
   "config": {
     "profile": {
@@ -112,11 +112,11 @@ npm run synth:all
 Bootstrap CDK Toolkit to your target accounts & regions. Make sure to update the `cdk bootstrap` commands with your valid AWS account IDs on both partitions:
 
 ```bash
-# AWS EUSC partition
-npx cdk bootstrap aws://111122223333/eusc-de-east-1 --profile european
-
 # AWS Standard partition
-npx cdk bootstrap aws://444455556666/eu-west-2 --profile standard
+npx cdk bootstrap aws://111122223333/eu-west-2 --profile standard
+
+# AWS EUSC partition
+npx cdk bootstrap aws://444455556666/eusc-de-east-1 --profile european
 ```
 
 ### 5. Deploy to EUSC partition

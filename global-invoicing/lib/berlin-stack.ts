@@ -83,7 +83,11 @@ export class BerlinStack extends cdk.Stack {
       tableName: `${props.prefix}-documents`,
       partitionKey: {
         name: "invoiceId",
-        type: dynamodb.AttributeType.STRING
+        type: dynamodb.AttributeType.STRING,
+      },
+      sortKey: {
+        name: "country",
+        type: dynamodb.AttributeType.STRING,
       },
       billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
       encryption: dynamodb.TableEncryption.AWS_MANAGED,   
@@ -99,7 +103,11 @@ export class BerlinStack extends cdk.Stack {
       tableName: `${props.prefix}-customers`,
       partitionKey: {
         name: "customerId",
-        type: dynamodb.AttributeType.STRING
+        type: dynamodb.AttributeType.STRING,
+      },
+      sortKey: {
+        name: "country",
+        type: dynamodb.AttributeType.STRING,
       },
       billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
       encryption: dynamodb.TableEncryption.AWS_MANAGED,   

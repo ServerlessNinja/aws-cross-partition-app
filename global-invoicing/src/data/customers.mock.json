@@ -1,0 +1,121 @@
+[
+  {
+    "customerId": "CUST-0001",
+    "name": "Nexus Innovations GmbH",
+    "country": "DE",
+    "email": "kontakt@nexus-innovations.de",
+    "vatId": "DE284956723",
+    "shipping": {
+      "address": "Kurfürstendamm 42",
+      "postcode": "10711",
+      "city": "Berlin"
+    }
+  },
+  {
+    "customerId": "CUST-0002",
+    "name": "Velocity Solutions Ltd",
+    "country": "GB",
+    "email": "hello@velocity-solutions.co.uk",
+    "vatId": "GB156847329",
+    "shipping": {
+      "address": "72 High address",
+      "postcode": "M1 1QE",
+      "city": "Manchester"
+    }
+  },
+  {
+    "customerId": "CUST-0003",
+    "name": "Synergy Conseils SAS",
+    "country": "FR",
+    "email": "contact@synergy-conseils.fr",
+    "vatId": "FR47298561047",
+    "shipping": {
+      "address": "85 Avenue des Champs-Élysées",
+      "postcode": "75008",
+      "city": "Paris"
+    }
+  },
+  {
+    "customerId": "CUST-0004",
+    "name": "Quantum Tech ApS",
+    "country": "DK",
+    "email": "info@quantum-tech.dk",
+    "vatId": "DK28394756",
+    "shipping": {
+      "address": "Nyhavn 14",
+      "postcode": "1051",
+      "city": "Copenhagen K"
+    }
+  },
+  {
+    "customerId": "CUST-0005",
+    "name": "Horizon Dynamics Corp",
+    "country": "US",
+    "email": "sales@horizon-dynamics.com",
+    "shipping": {
+      "address": "500 Park Avenue, Suite 2200",
+      "postcode": "10022",
+      "city": "New York, NY"
+    }
+  },
+  {
+    "customerId": "CUST-0006",
+    "name": "Catalyst Systems Sp. z o.o.",
+    "country": "PL",
+    "email": "biuro@catalyst-systems.pl",
+    "vatId": "PL5028476193",
+    "shipping": {
+      "address": "ul. Marszałkowska 84/92",
+      "postcode": "00-514",
+      "city": "Warsaw"
+    }
+  },
+  {
+    "customerId": "CUST-0007",
+    "name": "Prism Digital S.L.",
+    "country": "ES",
+    "email": "ventas@prism-digital.es",
+    "vatId": "ESB71829456",
+    "shipping": {
+      "address": "Paseo de la Castellana 89",
+      "postcode": "28046",
+      "city": "Madrid"
+    }
+  },
+  {
+    "customerId": "CUST-0008",
+    "name": "Infinity Commerce BV",
+    "country": "NL",
+    "email": "info@infinity-commerce.nl",
+    "vatId": "NL854726193B02",
+    "shipping": {
+      "address": "Amstel 1",
+      "postcode": "1018 DA",
+      "city": "Amsterdam"
+    }
+  },
+  {
+    "customerId": "CUST-0009",
+    "name": "Aurora Tech SARL",
+    "country": "BE",
+    "email": "contact@aurora-tech.be",
+    "vatId": "BE0927483651",
+    "shipping": {
+      "address": "Rue de la Loi 155",
+      "postcode": "1040",
+      "city": "Brussels"
+    }
+  },
+  {
+    "customerId": "CUST-0010",
+    "name": "Zenith Partners AB",
+    "country": "SE",
+    "email": "info@zenith-partners.se",
+    "vatId": "SE556847293201",
+    "shipping": {
+      "address": "Stureplan 6",
+      "postcode": "114 35",
+      "city": "Stockholm"
+    }
+  }
+]

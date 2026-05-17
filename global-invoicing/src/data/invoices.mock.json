@@ -1,0 +1,107 @@
+[
+  {
+    "invoice": {
+      "id": "INV-DE-10001",
+      "date": "2025-03-01",
+      "currency": "EUR",
+      "amount": 8750,
+      "taxRate": 19,
+      "total": 10412.50
+    },
+    "customer": {
+      "name": "Nexus Innovations GmbH",
+      "country": "DE",
+      "vatId": "DE284956723"
+    },
+    "lineItems": [
+      { "description": "AWS Cloud Infrastructure Setup & Migration", "quantity": 1, "price": 3500 },
+      { "description": "Kubernetes Cluster Management (12 months)", "quantity": 12, "price": 250 },
+      { "description": "Security Audit & Compliance Assessment", "quantity": 1, "price": 2000 },
+      { "description": "DevOps Consulting (40 hours @ €150/hr)", "quantity": 40, "price": 150 }
+    ]
+  },
+  {
+    "invoice": {
+      "id": "INV-DK-10002",
+      "date": "2025-03-05",
+      "currency": "EUR",
+      "amount": 4950,
+      "taxRate": 25,
+      "total": 6187.50
+    },
+    "customer": {
+      "name": "Quantum Tech ApS",
+      "country": "DK",
+      "vatId": "DK28394756"
+    },
+    "lineItems": [
+      { "description": "SaaS Platform Enterprise License (Annual)", "quantity": 1, "price": 2500 },
+      { "description": "API Gateway & Rate Limiting Module", "quantity": 1, "price": 1200 },
+      { "description": "User Onboarding & Training (8 sessions)", "quantity": 8, "price": 150 },
+      { "description": "Premium Support Package", "quantity": 1, "price": 300 }
+    ]
+  },
+  {
+    "invoice": {
+      "id": "INV-GB-10003",
+      "date": "2025-03-10",
+      "currency": "GBP",
+      "amount": 12500,
+      "taxRate": 20,
+      "total": 15000
+    },
+    "customer": {
+      "name": "Velocity Solutions Ltd",
+      "country": "GB",
+      "vatId": "GB156847329"
+    },
+    "lineItems": [
+      { "description": "Custom Web Application Development (120 hours @ £85/hr)", "quantity": 120, "price": 85 },
+      { "description": "Database Optimization & Query Tuning", "quantity": 1, "price": 1500 },
+      { "description": "CI/CD Pipeline Implementation", "quantity": 1, "price": 1800 },
+      { "description": "Post-Launch Technical Support (3 months)", "quantity": 3, "price": 800 }
+    ]
+  },
+  {
+    "invoice": {
+      "id": "INV-PL-10004",
+      "date": "2025-03-15",
+      "currency": "EUR",
+      "amount": 6200,
+      "taxRate": 23,
+      "total": 7626
+    },
+    "customer": {
+      "name": "Catalyst Systems Sp. z o.o.",
+      "country": "PL",
+      "vatId": "PL5028476193"
+    },
+    "lineItems": [
+      { "description": "Enterprise System Integration Services", "quantity": 1, "price": 3500 },
+      { "description": "Legacy System Modernization Assessment", "quantity": 1, "price": 1200 },
+      { "description": "Staff Training Programme (5 days)", "quantity": 5, "price": 300 },
+      { "description": "Documentation & Knowledge Transfer", "quantity": 1, "price": 200 }
+    ]
+  },
+  {
+    "invoice": {
+      "id": "INV-DE-10005",
+      "date": "2025-03-20",
+      "currency": "EUR",
+      "amount": 5600,
+      "taxRate": 19,
+      "total": 6664
+    },
+    "customer": {
+      "name": "Nexus Innovations GmbH",
+      "country": "DE",
+      "vatId": "DE284956723"
+    },
+    "lineItems": [
+      { "description": "Annual Software Maintenance Contract", "quantity": 1, "price": 2000 },
+      { "description": "24/7 Priority Support Package (12 months)", "quantity": 1, "price": 2400 },
+      { "description": "Quarterly Performance Review & Optimization", "quantity": 4, "price": 300 },
+      { "description": "Security Patches & Updates", "quantity": 1, "price": 900 }
+    ]
+  }
+]

@@ -6,11 +6,11 @@ import { readFileSync } from "fs";
 const prefix: string = configProps.standard.prefix;
 const region: string = configProps.standard.region;
 const profile: string = configProps.standard.profile;
-const dataFile = "src/data/customers.json";
+const mockData = "src/data/customers.mock.json";
 const tableName = `${prefix}-customers`;
 
 async function seedCustomers() {
-  const customers = JSON.parse(readFileSync(dataFile, "utf-8"));
+  const customers = JSON.parse(readFileSync(mockData, "utf-8"));
 
   if (!Array.isArray(customers)) {
     console.error("JSON file must contain an array of customers");
