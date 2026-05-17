@@ -112,11 +112,11 @@ npm run synth:all
 Bootstrap CDK Toolkit to your target accounts & regions. Make sure to update the `cdk bootstrap` commands with your valid AWS account IDs on both partitions:
 
 ```bash
-# AWS EUSC partition
-npx cdk bootstrap aws://111122223333/eusc-de-east-1 --profile european
-
 # AWS Standard partition
-npx cdk bootstrap aws://444455556666/eu-west-2 --profile standard
+npx cdk bootstrap aws://111122223333/eu-west-2 --profile standard
+
+# AWS EUSC partition
+npx cdk bootstrap aws://444455556666/eusc-de-east-1 --profile european
 ```
 
 ### 5. Deploy to EUSC partition
