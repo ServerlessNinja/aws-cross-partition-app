@@ -91,6 +91,7 @@ export class LondonStack extends cdk.Stack {
         EUSC_BUS_NAME: `${props.europeanProps.prefix}-bus`,
         EUSC_SOURCE: props.events.customers.source,
         EUSC_DETAIL_TYPE: props.events.customers.detailType,
+        EU_COUNTRIES: props.euCountries.join(','),
       },
     });
 

@@ -7,11 +7,7 @@ import boto3
 SIGNING_HELPER = "/opt/bin/aws_signing_helper"
 CERT_PATH = "/tmp/certificate.pem"
 KEY_PATH = "/tmp/private-key.pem"
-EU_COUNTRIES = [
-  "AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", 
-  "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", 
-  "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE",
-]
+EU_COUNTRIES = os.environ.get("EU_COUNTRIES", "").split(",")
 
 cached_credentials = None
 

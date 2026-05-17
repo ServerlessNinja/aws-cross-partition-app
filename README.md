@@ -49,10 +49,9 @@ aws sts get-caller-identity --profile standard
 aws sts get-caller-identity --profile european
 ```
 
-This AWS CDK project relies on AWS CLI profiles named `standard` and `european`. If you decide to name your profiles differently, or use another regions for deployment, please update the [config.ts](global-invoicing/src/config/config.ts) and [package.json](global-invoicing/package.json) files accordingly:
+This AWS CDK project relies on AWS CLI profiles named `standard` and `european`. If you decide to name your profiles differently, or use another regions for deployment, please update the [config.ts](global-invoicing/src/config/config.ts) and [package.json](global-invoicing/package.json) files:
 
-```bash
-# global-invoicing/src/config/config.ts
+```typescript
   ...
   standard: {
     partition: "aws",
@@ -66,8 +65,9 @@ This AWS CDK project relies on AWS CLI profiles named `standard` and `european`.
     profile: "european",
     ...
   },
+```
 
-# global-invoicing/package.json
+```json
   ...
   "config": {
     "profile": {
