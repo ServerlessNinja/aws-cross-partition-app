@@ -9,14 +9,14 @@ const certConfig: CertConfig = {
     commonName: configProps.certs.commonName,
     organization: configProps.certs.organizationalUnit,
     country: configProps.certs.country,
-    validityYears: 2,
+    validityYears: 1,
   },
   bridge: {
     commonName: configProps.certs.commonName,
     organizationalUnit: configProps.certs.organizationalUnit,
     organization: configProps.certs.organization,
     country: configProps.certs.country,
-    validityYears: 2,
+    validityYears: 1,
   },
   outputDir: 'cdk.out/cache',
 }
@@ -57,8 +57,8 @@ function generateCertificates(props: CertConfig): Certificates {
   bridgeCert.serialNumber = "02";
   bridgeCert.validity.notBefore = new Date();
   bridgeCert.validity.notAfter = new Date();
-  bridgeCert.validity.notAfter.setDate(
-    bridgeCert.validity.notAfter.getDate() + props.bridge.validityYears
+  bridgeCert.validity.notAfter.setFullYear(
+    bridgeCert.validity.notAfter.getFullYear() + props.bridge.validityYears
   );
 
   bridgeCert.setSubject([
