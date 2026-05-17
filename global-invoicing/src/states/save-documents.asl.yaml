@@ -13,6 +13,8 @@ States:
       vatId: "{% $states.input.customer.vatId %}"
       currency: "{% $states.input.invoice.currency %}"
       amount: "{% $states.input.invoice.amount %}"
+      taxRate: "{% $states.input.invoice.taxRate %}"
+      total: "{% $states.input.invoice.total %}"
       date: "{% $states.input.invoice.date %}"
       status: NEW_RECEIVED
       sovereignty: Global
@@ -23,7 +25,6 @@ States:
       Name: ${CountriesParameterName}
     Output:
       euCountries: "{% $split($states.result.Parameter.Value, ',') %}"
-#      payload: "{% $states.input %}"
     Next: Check Data Sovereignty
     Retry:
       - ErrorEquals:
@@ -78,6 +79,10 @@ States:
           S: "{% $currency %}"
         amount:
           N: "{% $string($amount) %}"
+        taxRate:
+          N: "{% $string($taxRate) %}"
+        total:
+          N: "{% $string($total) %}"
         date:
           S: "{% $date %}"
         status:
