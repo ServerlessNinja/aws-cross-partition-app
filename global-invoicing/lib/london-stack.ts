@@ -44,7 +44,7 @@ export class LondonStack extends cdk.Stack {
     });
 
     // Docs: https://docs.aws.amazon.com/rolesanywhere/latest/userguide/credential-helper.html
-    // Binary: https://rolesanywhere.amazonaws.com/releases/1.8.1/Aarch64/Linux/Amzn2023/aws_signing_helper
+    // Binary: https://rolesanywhere.amazonaws.com/releases/1.8.5/Aarch64/Linux/Amzn2023/aws_signing_helper
     const helperLayer = new lambda.LayerVersion(this, 'SigningHelperLayer', {
       layerVersionName: 'aws_signing_helper',
       code: lambda.Code.fromAsset('src/layers/signing-helper'),
@@ -88,9 +88,10 @@ export class LondonStack extends cdk.Stack {
         RA_PROFILE_ARN: props.europeanProps.raProfileArn,
         RA_ROLE_ARN: props.europeanProps.raRoleArn,
         RA_REGION: props.europeanProps.region,
-        EUSC_BUS_NAME: `${props.europeanProps.prefix}-bus`,
-        EUSC_SOURCE: props.events.customers.source,
-        EUSC_DETAIL_TYPE: props.events.customers.detailType,
+        // EUSC_BUS_NAME: `${props.europeanProps.prefix}-bus`,
+        // EUSC_SOURCE: props.events.customers.source,
+        // EUSC_DETAIL_TYPE: props.events.customers.detailType,
+        EUSC_CUSTOMERS_TABLE: `${props.europeanProps.prefix}-table`,
         EU_COUNTRIES: props.euCountries.join(','),
       },
     });

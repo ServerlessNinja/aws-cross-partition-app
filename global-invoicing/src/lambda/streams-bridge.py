@@ -88,26 +88,27 @@ def lambda_handler(event, context):
     print(f"Step 2: FAILED — {e}")
     raise
 
-  # Step 3: Send event to EUSC bus using the obtained credentials
+  # Step 3: Replicate stream changes directly to the EUSC DynamoDB table
   try:
-    print(f"Step 3: Sending event to EUSC bus: {os.environ['EUSC_BUS_NAME']}")
+    table_name = os.environ["EUSC_CUSTOMERS_TABLE"]
+    print(f"Step 3: Replicating to EUSC table: {table_name}")
 
-    eusc_events = boto3.client(
-      "events",
+    eusc_ddb = boto3.client(
+      "dynamodb",
       region_name=os.environ["RA_REGION"],
       aws_access_key_id=creds["accessKeyId"],
       aws_secret_access_key=creds["secretAccessKey"],
       aws_session_token=creds["sessionToken"],
+      endpoint_url=f"https://dynamodb.{os.environ['RA_REGION']}.amazonaws.eu",
     )
 
-    entries = []
+    replicated = 0
     skipped = 0
 
     for record in event["Records"]:
       event_name = record["eventName"]
       keys = record["dynamodb"]["Keys"]
 
-      # Only replicate EU customers
       if event_name in ("INSERT", "MODIFY"):
         new_image = record["dynamodb"]["NewImage"]
         country = new_image.get("country", {}).get("S", "")
@@ -116,34 +117,21 @@ def lambda_handler(event, context):
           skipped += 1
           continue
 
-      # For REMOVE, replicate anyway to clean up EUSC if record exists
-      detail = {
-        "eventName": event_name,
-        "keys": keys,
-      }
-      if event_name in ("INSERT", "MODIFY"):
-        detail["newImage"] = new_image
+        # NewImage is already in DynamoDB JSON (attribute-value) format
+        eusc_ddb.put_item(TableName=table_name, Item=new_image)
+        replicated += 1
 
-      entries.append({
-        "EventBusName": os.environ["EUSC_BUS_NAME"],
-        "Source": os.environ["EUSC_SOURCE"],
-        "DetailType": os.environ["EUSC_DETAIL_TYPE"],
-        "Detail": json.dumps(detail),
-      })
+      elif event_name == "REMOVE":
+        # Keys are in DynamoDB JSON format; delete to keep EUSC in sync
+        eusc_ddb.delete_item(TableName=table_name, Key=keys)
+        replicated += 1
 
-    # Send batched (max 10 per call, matches batchSize)
-    if entries:
-      result = eusc_events.put_events(Entries=entries)
-      print(f"Sent {len(entries)} events, failed: {result['FailedEntryCount']}")
-      if result["FailedEntryCount"] > 0:
-        for i, entry in enumerate(result["Entries"]):
-          if entry.get("ErrorCode"):
-            print(f"  Entry {i}: {entry['ErrorCode']} — {entry.get('ErrorMessage')}")
-    else:
-      print("No EU records to replicate")
+      else:
+        print(f"Ignoring unexpected eventName: {event_name}")
+        skipped += 1
 
-    print(f"Done: {len(entries)} replicated, {skipped} skipped")
-    return {"replicated": len(entries), "skipped": skipped}
+    print(f"Done: {replicated} replicated, {skipped} skipped")
+    return {"replicated": replicated, "skipped": skipped}
 
   except Exception as e:
     print(f"Step 3: FAILED — {e}")
