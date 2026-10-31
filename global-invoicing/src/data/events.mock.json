@@ -1,0 +1,46 @@
+[
+  {
+    "source": "org.surfave.invoicing",
+    "detail-type": "InvoiceForwarder",
+    "detail": {
+      "invoice": {
+        "id": "INV-SE-10001",
+        "date": "2025-03-01",
+        "currency": "SEK",
+        "amount": 217000,
+        "taxRate": 25,
+        "total": 271250
+      },
+      "customer": {
+        "name": "Polaris Dynamics AB",
+        "country": "SE",
+        "vatId": "SE556029810401"
+      },
+      "lineItems": [
+        {
+          "description": "AWS Landing Zone Setup & Architecture",
+          "unit": "project",
+          "quantity": 1,
+          "price": 42000
+        },
+        {
+          "description": "Kubernetes Cluster Management",
+          "unit": "month",
+          "quantity": 12,
+          "price": 7500
+        },
+        {
+          "description": "Cloud Security & Compliance Audit",
+          "quantity": 1,
+          "price": 28000
+        },
+        {
+          "description": "DevOps Consulting",
+          "unit": "hour",
+          "quantity": 60,
+          "price": 950
+        }
+      ]
+    }
+  }
+]

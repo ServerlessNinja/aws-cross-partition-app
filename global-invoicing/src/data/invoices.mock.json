@@ -1,30 +1,9 @@
 [
   {
     "invoice": {
-      "id": "INV-DE-10001",
-      "date": "2025-03-01",
-      "currency": "EUR",
-      "amount": 8750,
-      "taxRate": 19,
-      "total": 10412.50
-    },
-    "customer": {
-      "name": "Nexus Innovations GmbH",
-      "country": "DE",
-      "vatId": "DE284956723"
-    },
-    "lineItems": [
-      { "description": "AWS Cloud Infrastructure Setup & Migration", "quantity": 1, "price": 3500 },
-      { "description": "Kubernetes Cluster Management (12 months)", "quantity": 12, "price": 250 },
-      { "description": "Security Audit & Compliance Assessment", "quantity": 1, "price": 2000 },
-      { "description": "DevOps Consulting (40 hours @ €150/hr)", "quantity": 40, "price": 150 }
-    ]
-  },
-  {
-    "invoice": {
       "id": "INV-DK-10002",
-      "date": "2025-03-05",
-      "currency": "EUR",
+      "date": "2026-03-05",
+      "currency": "DKK",
       "amount": 4950,
       "taxRate": 25,
       "total": 6187.50
@@ -35,16 +14,16 @@
       "vatId": "DK28394756"
     },
     "lineItems": [
-      { "description": "SaaS Platform Enterprise License (Annual)", "quantity": 1, "price": 2500 },
+      { "description": "SaaS Platform Enterprise License", "unit": "year", "quantity": 1, "price": 2500 },
       { "description": "API Gateway & Rate Limiting Module", "quantity": 1, "price": 1200 },
-      { "description": "User Onboarding & Training (8 sessions)", "quantity": 8, "price": 150 },
+      { "description": "User Onboarding & Training", "unit": "hour", "quantity": 8, "price": 150 },
       { "description": "Premium Support Package", "quantity": 1, "price": 300 }
     ]
   },
   {
     "invoice": {
       "id": "INV-GB-10003",
-      "date": "2025-03-10",
+      "date": "2026-03-10",
       "currency": "GBP",
       "amount": 12500,
       "taxRate": 20,
@@ -56,16 +35,16 @@
       "vatId": "GB156847329"
     },
     "lineItems": [
-      { "description": "Custom Web Application Development (120 hours @ £85/hr)", "quantity": 120, "price": 85 },
-      { "description": "Database Optimization & Query Tuning", "quantity": 1, "price": 1500 },
+      { "description": "Custom Web Application Development", "unit": "hour", "quantity": 120, "price": 85 },
+      { "description": "Database Optimization & Query Tuning", "unit": "day", "quantity": 1, "price": 1500 },
       { "description": "CI/CD Pipeline Implementation", "quantity": 1, "price": 1800 },
-      { "description": "Post-Launch Technical Support (3 months)", "quantity": 3, "price": 800 }
+      { "description": "Post-Launch Technical Support", "unit": "month", "quantity": 3, "price": 800 }
     ]
   },
   {
     "invoice": {
       "id": "INV-PL-10004",
-      "date": "2025-03-15",
+      "date": "2026-03-15",
       "currency": "EUR",
       "amount": 6200,
       "taxRate": 23,
@@ -77,16 +56,16 @@
       "vatId": "PL5028476193"
     },
     "lineItems": [
-      { "description": "Enterprise System Integration Services", "quantity": 1, "price": 3500 },
-      { "description": "Legacy System Modernization Assessment", "quantity": 1, "price": 1200 },
-      { "description": "Staff Training Programme (5 days)", "quantity": 5, "price": 300 },
-      { "description": "Documentation & Knowledge Transfer", "quantity": 1, "price": 200 }
+      { "description": "Enterprise System Integration Services", "unit": "month", "quantity": 1, "price": 3500 },
+      { "description": "Legacy System Modernization Assessment", "unit": "month", "quantity": 1, "price": 1200 },
+      { "description": "Staff Training Programme", "unit": "day", "quantity": 5, "price": 300 },
+      { "description": "Documentation & Knowledge Transfer", "unit": "day", "quantity": 1, "price": 200 }
     ]
   },
   {
     "invoice": {
       "id": "INV-DE-10005",
-      "date": "2025-03-20",
+      "date": "2026-03-20",
       "currency": "EUR",
       "amount": 5600,
       "taxRate": 19,
@@ -98,10 +77,73 @@
       "vatId": "DE284956723"
     },
     "lineItems": [
-      { "description": "Annual Software Maintenance Contract", "quantity": 1, "price": 2000 },
-      { "description": "24/7 Priority Support Package (12 months)", "quantity": 1, "price": 2400 },
-      { "description": "Quarterly Performance Review & Optimization", "quantity": 4, "price": 300 },
-      { "description": "Security Patches & Updates", "quantity": 1, "price": 900 }
+      { "description": "Annual Software Maintenance Contract", "unit": "year", "quantity": 1, "price": 2000 },
+      { "description": "24/7 Priority Support Package", "unit": "year", "quantity": 1, "price": 2400 },
+      { "description": "Quarterly Performance Review & Optimization", "unit": "hour", "quantity": 4, "price": 300 },
+      { "description": "Security Patches & Updates", "unit": "day", "quantity": 1, "price": 900 }
+    ]
+  },
+  {
+    "invoice": {
+      "id": "INV-CH-10006",
+      "date": "2026-03-25",
+      "currency": "CHF",
+      "amount": 78800,
+      "taxRate": 8.1,
+      "total": 85182.80
+    },
+    "customer": {
+      "name": "Alpine Systems AG",
+      "country": "CH",
+      "vatId": "CHE-105.775.427 MWST"
+    },
+    "lineItems": [
+      { "description": "AWS Landing Zone Migration", "unit": "project", "quantity": 1, "price": 38000 },
+      { "description": "Kubernetes Cluster Management", "unit": "month", "quantity": 6, "price": 3200 },
+      { "description": "Cloud Security & Compliance Audit", "quantity": 1, "price": 15000 },
+      { "description": "DevOps Consulting", "unit": "hour", "quantity": 30, "price": 220 }
+    ]
+  },
+  {
+    "invoice": {
+      "id": "INV-NO-10007",
+      "date": "2026-03-28",
+      "currency": "NOK",
+      "amount": 317000,
+      "taxRate": 25,
+      "total": 396250
+    },
+    "customer": {
+      "name": "Fjord Digital AS",
+      "country": "NO",
+      "vatId": "NO923609016MVA"
+    },
+    "lineItems": [
+      { "description": "Cloud Migration Strategy & Roadmap", "unit": "project", "quantity": 1, "price": 85000 },
+      { "description": "Managed Kubernetes Operations", "unit": "month", "quantity": 12, "price": 9500 },
+      { "description": "Data Platform Modernization", "quantity": 1, "price": 60000 },
+      { "description": "DevOps Consulting", "unit": "hour", "quantity": 40, "price": 1450 }
+    ]
+  },
+  {
+    "invoice": {
+      "id": "INV-IS-10008",
+      "date": "2026-04-02",
+      "currency": "ISK",
+      "amount": 20480000,
+      "taxRate": 24,
+      "total": 25395200
+    },
+    "customer": {
+      "name": "Reykjavik Cloud ehf.",
+      "country": "IS",
+      "vatId": "IS123456"
+    },
+    "lineItems": [
+      { "description": "Cloud Infrastructure Assessment", "unit": "project", "quantity": 1, "price": 4800000 },
+      { "description": "Kubernetes Cluster Management", "unit": "month", "quantity": 12, "price": 950000 },
+      { "description": "Security Audit & Compliance Assessment", "quantity": 1, "price": 2600000 },
+      { "description": "DevOps Consulting", "unit": "hour", "quantity": 40, "price": 42000 }
     ]
   }
 ]
