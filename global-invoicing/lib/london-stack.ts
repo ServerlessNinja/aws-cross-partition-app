@@ -15,7 +15,6 @@ interface LondonStackProps extends cdk.StackProps {
   prefix: string;
   events: {
     invoices: EventBridgeConfig;
-    customers: EventBridgeConfig;
   };
   europeanProps: {
     prefix: string;
@@ -88,10 +87,7 @@ export class LondonStack extends cdk.Stack {
         RA_PROFILE_ARN: props.europeanProps.raProfileArn,
         RA_ROLE_ARN: props.europeanProps.raRoleArn,
         RA_REGION: props.europeanProps.region,
-        // EUSC_BUS_NAME: `${props.europeanProps.prefix}-bus`,
-        // EUSC_SOURCE: props.events.customers.source,
-        // EUSC_DETAIL_TYPE: props.events.customers.detailType,
-        EUSC_CUSTOMERS_TABLE: `${props.europeanProps.prefix}-table`,
+        EUSC_CUSTOMERS_TABLE: `${props.europeanProps.prefix}-customers`,
         EU_COUNTRIES: props.euCountries.join(','),
       },
     });

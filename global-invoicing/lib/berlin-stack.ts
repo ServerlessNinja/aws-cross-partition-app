@@ -18,7 +18,6 @@ interface BerlinStackStackProps extends cdk.StackProps {
   countries: string[];
   events: {
     invoices: EventBridgeConfig;
-    customers: EventBridgeConfig;
   };
 }
 
@@ -149,25 +148,6 @@ export class BerlinStack extends cdk.Stack {
 
     invoicesTable.grantWriteData(invoicesWorkflow);
 
-    // const customersWorkflow = new states.StateMachine(this, "CustomerProcessingStateMachine", {
-    //   stateMachineName: `${props.prefix}-save-customers`,
-    //   stateMachineType: states.StateMachineType.STANDARD,
-    //   definitionBody: states.DefinitionBody.fromFile('src/states/save-customers-eu.asl.yaml'),
-    //   definitionSubstitutions: {
-    //     AwsPartition: this.partition,
-    //     CustomersTableName: customersTable.tableName,
-    //   },
-    //   logs: {
-    //     level: states.LogLevel.ALL,
-    //     destination: new logs.LogGroup(this, "StateMachineLogGroup2", {
-    //       logGroupName: `${props.prefix}-save-customers`,
-    //       removalPolicy: cdk.RemovalPolicy.DESTROY,
-    //     }),
-    //   },
-    // });
-
-    // customersTable.grantWriteData(customersWorkflow);
-
     new events.Rule(this, "EventRule", {
       ruleName: `${props.prefix}-save-documents`,
       description: "Trigger processing of European invoices",
@@ -193,27 +173,6 @@ export class BerlinStack extends cdk.Stack {
         ),
       ]
     });
-
-    // new events.Rule(this, "EventRule2", {
-    //   ruleName: `${props.prefix}-save-customers`,
-    //   description: "Trigger processing of European customers",
-    //   eventBus: eventBus,
-    //   eventPattern: {
-    //     source: [ props.events.customers.source ],
-    //     detailType: [ props.events.customers.detailType ],
-    //   },
-    //   targets: [
-    //     new targets.SfnStateMachine(customersWorkflow, {
-    //       input: events.RuleTargetInput.fromEventPath("$.detail"),
-    //     }),
-    //     new targets.CloudWatchLogGroup(
-    //       new logs.LogGroup(this, "EventRuleLogGroup2", {
-    //         logGroupName: `/aws/events/${props.prefix}-save-customers`,
-    //         removalPolicy: cdk.RemovalPolicy.DESTROY,
-    //       })
-    //     ),
-    //   ]
-    // });
 
     new StringParameter(this, "TrustAnchorArnParam", {
       parameterName: `/${props.prefix}/ra-trust-anchor-arn`,

@@ -34,7 +34,6 @@ export interface ConfigProps {
   certs: OrganizationInfo;
   events: {
     invoices: EventBridgeConfig;
-    customers: EventBridgeConfig;
   }
   cache: string;
   countries: string[];

@@ -27,10 +27,6 @@ export const configProps: ConfigProps = {
       source: "org.surfave.invoicing",
       detailType: "InvoiceForwarder",
     },
-    customers: {
-      source: "org.surfave.invoicing",
-      detailType: "CustomerForwarder",
-    }
   },
   countries: [
     "AT",
