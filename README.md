@@ -1,6 +1,6 @@
 # Overview
 
-AWS CDK TypeScript project: a demo serverless application running cross-partition (Standard and EUSC) for invoice processing.
+AWS CDK TypeScript project: a demo serverless application running cross-partition (Standard and ESC) for invoice processing.
 
 ## Prerequisites
 
@@ -77,7 +77,25 @@ This AWS CDK project relies on AWS CLI profiles named `standard` and `european`.
   },
 ```
 
-## Deploy
+## Deploy (scripted)
+
+Use the [cdk-deploy.sh](./cdk-deploy.sh) script to deploy the CDK App to both AWS partitions.
+
+The script follows the following steps:
+
+1. Install and build the TypeScript project (CDK App)
+2. Generate self-signed X.509 certificates
+3. Sythesize the CDK App
+4. Bootstrap the CDK Toolkit
+5. Deploy CDK Stack to ESC partition
+6. Get SSM Parameters from ESC partition
+7. Deploy CDK Stack to Standard partition
+8. Upload Certificates to Standard partition
+9. Seed databases with mock data (optional)
+
+## Deploy (manually)
+
+Use the following sequence to deploy the CDK app to both AWS partitions in manual way.
 
 ### 1. Install and build
 
@@ -91,7 +109,7 @@ npm run build
 
 ### 2. Generate certificates
 
-Generate local self-signed certificates:
+Generate local self-signed X.509 certificates:
 
 ```bash
 npm run certs:generate
@@ -115,21 +133,21 @@ Bootstrap CDK Toolkit to your target accounts & regions. Make sure to update the
 # AWS Standard partition
 npx cdk bootstrap aws://111122223333/eu-west-2 --profile standard
 
-# AWS EUSC partition
+# AWS ESC partition
 npx cdk bootstrap aws://444455556666/eusc-de-east-1 --profile european
 ```
 
-### 5. Deploy to EUSC partition
+### 5. Deploy to ESC partition
 
-Start deployment of CDK stage (single stack) on EUSC partition:
+Start deployment of CDK stage (single stack) on ESC partition:
 
 ```bash
 npm run deploy:european
 ```
 
-### 6. Get EUSC parameters
+### 6. Get ESC parameters
 
-Get SSM parameters' values from EUSC partition and synthesize the CDK stacks again:
+Get SSM parameters' values from ESC partition and synthesize the CDK stacks again:
 
 ```bash
 npm run params:get
@@ -138,15 +156,15 @@ npm run synth:all
 
 Parameters will be stored in `cdk.out/cache/params.json` file (git ignored).
 
-### 4. Deploy to Standard partition
+### 7. Deploy to Standard partition
 
-Start deployment of CDK stage (single stack) on EUSC partition:
+Start deployment of CDK stage (single stack) on ESC partition:
 
 ```bash
 npm run deploy:standard
 ```
 
-### 5. Upload Certificates
+### 8. Upload Certificates
 
 Save content of self-signed certificates in Secrets Manager on Standard partition:
 
@@ -154,7 +172,7 @@ Save content of self-signed certificates in Secrets Manager on Standard partitio
 npm run certs:upload
 ```
 
-### 6. Seed database (optional)
+### 9. Seed database (optional)
 
 Seed DynamoDB tables with some mock items for `customers` and `invoices`:
 
