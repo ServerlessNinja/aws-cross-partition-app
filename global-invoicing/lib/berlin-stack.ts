@@ -18,7 +18,6 @@ interface BerlinStackStackProps extends cdk.StackProps {
   countries: string[];
   events: {
     invoices: EventBridgeConfig;
-    customers: EventBridgeConfig;
   };
 }
 
@@ -119,6 +118,17 @@ export class BerlinStack extends cdk.Stack {
       deletionProtection: false,
     });
 
+    crossPartitionRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: [ 
+          "dynamodb:PutItem",
+          "dynamodb:UpdateItem",
+          "dynamodb:DeleteItem"
+        ],
+        resources: [ customersTable.tableArn ],
+      })
+    );
+
     const invoicesWorkflow = new states.StateMachine(this, "InvoiceProcessingStateMachine", {
       stateMachineName: `${props.prefix}-save-documents`,
       stateMachineType: states.StateMachineType.STANDARD,
@@ -137,25 +147,6 @@ export class BerlinStack extends cdk.Stack {
     });
 
     invoicesTable.grantWriteData(invoicesWorkflow);
-
-    const customersWorkflow = new states.StateMachine(this, "CustomerProcessingStateMachine", {
-      stateMachineName: `${props.prefix}-save-customers`,
-      stateMachineType: states.StateMachineType.STANDARD,
-      definitionBody: states.DefinitionBody.fromFile('src/states/save-customers-eu.asl.yaml'),
-      definitionSubstitutions: {
-        AwsPartition: this.partition,
-        CustomersTableName: customersTable.tableName,
-      },
-      logs: {
-        level: states.LogLevel.ALL,
-        destination: new logs.LogGroup(this, "StateMachineLogGroup2", {
-          logGroupName: `${props.prefix}-save-customers`,
-          removalPolicy: cdk.RemovalPolicy.DESTROY,
-        }),
-      },
-    });
-
-    customersTable.grantWriteData(customersWorkflow);
 
     new events.Rule(this, "EventRule", {
       ruleName: `${props.prefix}-save-documents`,
@@ -177,27 +168,6 @@ export class BerlinStack extends cdk.Stack {
         new targets.CloudWatchLogGroup(
           new logs.LogGroup(this, "EventRuleLogGroup", {
             logGroupName: `/aws/events/${props.prefix}-save-invoices`,
-            removalPolicy: cdk.RemovalPolicy.DESTROY,
-          })
-        ),
-      ]
-    });
-
-    new events.Rule(this, "EventRule2", {
-      ruleName: `${props.prefix}-save-customers`,
-      description: "Trigger processing of European customers",
-      eventBus: eventBus,
-      eventPattern: {
-        source: [ props.events.customers.source ],
-        detailType: [ props.events.customers.detailType ],
-      },
-      targets: [
-        new targets.SfnStateMachine(customersWorkflow, {
-          input: events.RuleTargetInput.fromEventPath("$.detail"),
-        }),
-        new targets.CloudWatchLogGroup(
-          new logs.LogGroup(this, "EventRuleLogGroup2", {
-            logGroupName: `/aws/events/${props.prefix}-save-customers`,
             removalPolicy: cdk.RemovalPolicy.DESTROY,
           })
         ),
